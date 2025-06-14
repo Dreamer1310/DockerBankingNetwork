@@ -1,0 +1,17 @@
+services:
+  # A simple Nginx service that will join our custom network
+  webserver:
+    image: nginx:latest
+    container_name: my_nginx_server
+    ports:
+      - "80:80" # Map host port 80 to container port 80
+      - "443:443"
+    networks:
+      - my_custom_network # Explicitly connect this service to our custom network
+    restart: always
+
+# Define the custom network
+networks:
+  my_custom_network: # This is the name of the network within this Compose file
+    driver: bridge   # 'bridge' is the default and most common driver
+    name: my_banking_app_network # This is the actual global Docker network name
